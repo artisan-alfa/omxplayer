@@ -4,25 +4,41 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"regexp"
 	"time"
 )
 
 func main() {
+	v := true
 	if _, err := os.Stat("concat.mp4"); err == nil {
 		fmt.Printf("File exists\n")
-	} else {
-		fmt.Printf("File does not exist\n")
-	}
-
-	if checkExt(".mp4") > 0 {
+		// cmd := exec.Command("omxplayer", "-o", "hdmi", "test.mp4")
+		// err := cmd.Run()
+		// if err != nil {
+		// 	log.Fatal(err)
+		// }
+		v = true
+	} else if checkExt(".mp4") > 0 {
 		fmt.Println("files visible")
 		// cmd := exec.Command("omxplayer", "-o", "hdmi", "test.mp4")
 		// err := cmd.Run()
 		// if err != nil {
 		// 	log.Fatal(err)
 		// }
+		v = true
+	} else {
+		fmt.Println("no file")
+		v = false
+	}
+	fmt.Println(v)
+	for checkExt(".mp4") > 0 {
+		cmd := exec.Command("omxplayer", "-o", "hdmi", "test.mp4")
+		err := cmd.Run()
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 
 }
