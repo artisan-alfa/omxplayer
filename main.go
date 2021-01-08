@@ -14,19 +14,19 @@ func main() {
 	v := true
 	if _, err := os.Stat("concat.mp4"); err == nil {
 		fmt.Printf("File exists\n")
-		// cmd := exec.Command("omxplayer", "-o", "hdmi", "test.mp4")
-		// err := cmd.Run()
-		// if err != nil {
-		// 	log.Fatal(err)
-		// }
+		cmd := exec.Command("omxplayer", "-o", "hdmi", "concat.mp4")
+		err := cmd.Run()
+		if err != nil {
+			log.Fatal(err)
+		}
 		v = true
 	} else if checkExt(".mp4") > 0 {
 		fmt.Println("files visible")
-		// cmd := exec.Command("omxplayer", "-o", "hdmi", "test.mp4")
-		// err := cmd.Run()
-		// if err != nil {
-		// 	log.Fatal(err)
-		// }
+		cmd := exec.Command("omxplayer", "-o", "hdmi", "*.mp4")
+		err := cmd.Run()
+		if err != nil {
+			log.Fatal(err)
+		}
 		v = true
 	} else {
 		fmt.Println("no file")
